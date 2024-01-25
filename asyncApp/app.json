@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "asyncApp",
+    "slug": "asyncApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.ewdson7.asyncApp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a10003cd-5c57-40bf-ae7b-736917e666cf"
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Planos</title>
+</head>
+<body>
+
+<form id="selecaoForm" onsubmit="enviarFormulario(event)">
+    <label for="planoAtual">Plano Atual:</label>
+    <select id="planoAtual" name="planoAtual">
+        <option value="1">Plano 1</option>
+        <option value="2">Plano 2</option>
+        <option value="3">Plano 3</option>
+        <option value="4">Plano 4</option>
+        <option value="5">Plano 5</option>
+        <option value="6">Plano 6</option>
+    </select>
+    
+    <br>
+
+    <label for="planoNovo">Plano Novo:</label>
+    <select id="planoNovo" name="planoNovo">
+        <option value="1">Plano 1</option>
+        <option value="2">Plano 2</option>
+        <option value="3">Plano 3</option>
+        <option value="4">Plano 4</option>
+        <option value="5">Plano 5</option>
+        <option value="6">Plano 6</option>
+    </select>
+    
+    <br>
+
+    <label for="vencimento">Vencimento:</label>
+    <select id="vencimento" name="vencimento">
+        <option value="05">05</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+    </select>
+
+    <br>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<script>
+    const dataPlanos = [
+        { id: 1, plano: 250, valor: 110 },
+        { id: 2, plano: 350, valor: 130 },
+        { id: 3, plano: 450, valor: 160 },
+        { id: 4, plano: 500, valor: 144.33 },
+        { id: 5, plano: 600, valor: 210 },
+        { id: 6, plano: 700, valor: 177.67 }
+    ];
+
+    function enviarFormulario(event) {
+        event.preventDefault();
+
+        // Obter valores selecionados
+        const planoAtualSelecionado = document.getElementById('planoAtual').value;
+        const planoNovoSelecionado = document.getElementById('planoNovo').value;
+        const vencimentoSelecionado = document.getElementById('vencimento').value;
+
+        // Obter preço do plano atual e plano novo com base no ID
+        const precoPlanoAtual = obterPrecoDoPlano(planoAtualSelecionado);
+        const precoPlanoNovo = obterPrecoDoPlano(planoNovoSelecionado);
+
+        // Calcular proporcional entre plano atual e plano novo
+        const proporcional = calcularProporcional(precoPlanoAtual, precoPlanoNovo, vencimentoSelecionado);
+
+        // Criar uma nova janela/página para exibir o resultado
+        const novaJanela = window.open('', '_blank');
+        novaJanela.document.write('<h1>Opções Selecionadas:</h1>');
+        novaJanela.document.write('<p>Plano Atual: ' + precoPlanoAtual + '</p>');
+        novaJanela.document.write('<p>Plano Novo: ' + precoPlanoNovo + '</p>');
+        novaJanela.document.write('<p>Vencimento: ' + vencimentoSelecionado + '</p>');
+        novaJanela.document.write('<p>Proporcional: ' + proporcional.toFixed(2) + '</p>');
+    }
+
+    function obterPrecoDoPlano(planoId) {
+        const plano = dataPlanos.find(item => item.id === parseInt(planoId, 10));
+        return plano ? plano.valor : 'Não encontrado';
+    }
+
+    function calcularProporcional(precoPlanoAtual, precoPlanoNovo, vencimento) {
+        // Definir datas de abertura e fechamento de fatura com base no vencimento
+        const hoje = new Date();
+        const abertura = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+        let fechamento;
+
+        if (vencimento <= 10) {
+            fechamento = new Date(hoje.getFullYear(), hoje.getMonth(), 30);
+        } else if (vencimento <= 20) {
+            abertura.setMonth(hoje.getMonth() - 1, 11);
+            fechamento = new Date(hoje.getFullYear(), hoje.getMonth(), 10);
+        } else {
+            abertura.setMonth(hoje.getMonth() - 1, 20);
+            fechamento = new Date(hoje.getFullYear(), hoje.getMonth(), 20);
+        }
+
+        // Calcular proporcional com base nos dias entre abertura e fechamento
+        const diasProporcionais = (hoje - abertura) / (fechamento - abertura);
+        const proporcional = precoPlanoAtual * (1 - diasProporcionais) + precoPlanoNovo * diasProporcionais;
+
+        return proporcional;
+    }
+</script>
+
+</body>
+</html>

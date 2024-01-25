@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de Proporcional</title>
+    <link rel="stylesheet" href="_css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="_js/scripts.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="calc-container">
+        <h2>Calculadora de Proporcional</h2>
+        <h3>Mudança de Plano</h3>
+        <form id="imc-form" onsubmit="enviarFormulario(event)">
+          <div class="form-inputs" class="hide">
+            <div class="form-control">
+              <label for="planoAtual">Plano Atual: </label>
+              <select name="planoAtual" id="planoAtual">
+                <option value="1">250 Megas</option>
+                <option value="2">350 Megas</option>
+                <option value="3">450 Megas</option>
+                <option value="4">500 Megas</option>
+                <option value="5">600 Megas</option>
+                <option value="6">700 Megas</option>
+              </select>
+            </div>
+            <div class="form-control">
+                <label for="planoNovo">Novo Plano: </label>
+                <select name="planoNovo" id="planoNovo">
+                  <option value="1">250 Megas</option>
+                  <option value="2">350 Megas</option>
+                  <option value="3">450 Megas</option>
+                  <option value="4">500 Megas</option>
+                  <option value="5">600 Megas</option>
+                  <option value="6">700 Megas</option>
+                </select>
+              </div>
+            <div class="form-control">
+                <label for="vencimento">Vencimento: </label>
+                <select name="vencimento" id="vencimento">
+                    <option value="5" selected>05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                </select>
+            </div>
+          </div>
+          <div class="action-control">
+            <button id="calc-btn" type="submit">Calcular</button>
+            <button id="clear-btn">Limpar</button>
+          </div>
+        </form>
+      </div>
+      <div id="result-container" >
+      <p id="pAtualResult">O seu plano atual é: <span> </span></p>
+      </div>
+    </div>
+  </body>
+</html>
